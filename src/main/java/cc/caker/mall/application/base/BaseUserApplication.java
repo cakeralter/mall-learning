@@ -1,12 +1,13 @@
 package cc.caker.mall.application.base;
 
-import cc.caker.mall.dal.base.mapper.BaseUserMapper;
-import cc.caker.mall.dal.base.po.BaseUser;
+import cc.caker.mall.dal.base.mapper.BaseUserDOMapper;
+import cc.caker.mall.dal.base.po.BaseUserDO;
 import cc.caker.mall.web.base.convert.BaseUserConvert;
 import cc.caker.mall.web.base.vo.BaseUserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * BaseUserApplication
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class BaseUserApplication {
 
     @Autowired
-    private BaseUserMapper baseUserMapper;
+    private BaseUserDOMapper baseUserDOMapper;
 
     /**
      * saveOrUpdate
@@ -28,10 +29,11 @@ public class BaseUserApplication {
      * @param baseUserVO
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public Integer saveOrUpdate(BaseUserVO baseUserVO) {
-        BaseUser entity = BaseUserConvert.v2d(baseUserVO);
+        BaseUserDO entity = BaseUserConvert.v2d(baseUserVO);
         BaseDOHelper.setBaseForCreate(entity);
-        baseUserMapper.insert(entity);
+        baseUserDOMapper.insert(entity);
         return 0;
     }
 }

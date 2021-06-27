@@ -1,7 +1,7 @@
 package cc.caker.mall.dal;
 
-import cc.caker.mall.dal.base.mapper.BaseUserMapper;
-import cc.caker.mall.dal.base.po.BaseUser;
+import cc.caker.mall.dal.base.mapper.BaseUserDOMapper;
+import cc.caker.mall.dal.base.po.BaseUserDO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,30 +17,30 @@ import java.time.LocalDateTime;
 public class BaseUserTest {
 
     @Autowired
-    private BaseUserMapper baseUserMapper;
+    private BaseUserDOMapper baseUserDOMapper;
 
     @Test
     public void testInsert() {
-        BaseUser baseUser = new BaseUser();
-        baseUser.setGmtCreate(LocalDateTime.now());
-        baseUser.setGmtModify(LocalDateTime.now());
-        baseUser.setCreator(0L);
-        baseUser.setModifier(0L);
+        BaseUserDO baseUserDO = new BaseUserDO();
+        baseUserDO.setGmtCreate(LocalDateTime.now());
+        baseUserDO.setGmtModify(LocalDateTime.now());
+        baseUserDO.setCreator(0L);
+        baseUserDO.setModifier(0L);
 //        baseUser.setIsDeleted();
-        baseUser.setUid("10001");
-        baseUser.setUserName("测试账号");
-        baseUser.setNickName("测试账号");
+        baseUserDO.setUid("10001");
+        baseUserDO.setUserName("测试账号");
+        baseUserDO.setNickName("测试账号");
 //        baseUser.setPassword("");
 //        baseUser.setEmail();
 //        baseUser.setAvatar();
 //        baseUser.setPhone();
 //        baseUser.setStatus();
-        baseUser.setSex("M");
+        baseUserDO.setSex("M");
 //        baseUser.setBirthday();
 //        baseUser.setSignature();
 //        baseUser.setLocation();
 //        baseUser.setAddress();
 //        baseUser.setRemark();
-        baseUserMapper.insert(baseUser);
+        baseUserDOMapper.insert(baseUserDO);
     }
 }

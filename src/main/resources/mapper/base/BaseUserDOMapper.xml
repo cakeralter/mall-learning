@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.caker.mall.dal.base.mapper.BaseUserDOMapper">
+
+    <insert id="insert" parameterType="cc.caker.mall.dal.base.po.BaseUserDO">
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into base_user
+        (gmt_create, gmt_modify, creator, modifier,
+        is_deleted, uid, user_name, nick_name, password,
+        email, avatar, phone, status, sex, birthday,
+        signature, location, address, remark)
+        values (sysdate(), sysdate(), #{creator}, #{modifier}, 'N',
+        #{uid}, #{userName}, #{nickName}, #{password},
+        #{email}, #{avatar}, #{phone}, #{status}, #{sex}, #{birthday},
+        #{signature}, #{location}, #{address}, #{remark});
+    </insert>
+
+</mapper>

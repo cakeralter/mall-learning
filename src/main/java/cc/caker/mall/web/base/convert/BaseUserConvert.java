@@ -1,6 +1,6 @@
 package cc.caker.mall.web.base.convert;
 
-import cc.caker.mall.dal.base.po.BaseUser;
+import cc.caker.mall.dal.base.po.BaseUserDO;
 import cc.caker.mall.web.base.vo.BaseUserVO;
 
 /**
@@ -18,21 +18,22 @@ public class BaseUserConvert {
      * @param baseUserVO
      * @return
      */
-    public static BaseUser v2d(BaseUserVO baseUserVO) {
-        BaseUser baseUser = new BaseUser();
-        baseUser.setId(baseUserVO.getId());
-        baseUser.setUserName(baseUserVO.getUserName());
-        baseUser.setNickName(baseUserVO.getNickName());
-        baseUser.setEmail(baseUserVO.getEmail());
-        baseUser.setAvatar(baseUserVO.getAvatar());
-        baseUser.setPhone(baseUserVO.getPhone());
-        baseUser.setStatus(baseUserVO.getStatus());
-        baseUser.setSex(baseUserVO.getSex());
-        baseUser.setBirthday(baseUserVO.getBirthday());
-        baseUser.setSignature(baseUserVO.getSignature());
-        baseUser.setLocation(baseUserVO.getLocation());
-        baseUser.setAddress(baseUserVO.getAddress());
-        baseUser.setRemark(baseUserVO.getRemark());
-        return baseUser;
+    public static BaseUserDO v2d(BaseUserVO baseUserVO) {
+        BaseUserDO entity = new BaseUserDO();
+        entity.setId(baseUserVO.getId());
+        entity.setUid(baseUserVO.getUid());
+        entity.setUserName(baseUserVO.getUserName());
+        entity.setNickName(baseUserVO.getNickName());
+        entity.setEmail(baseUserVO.getEmail());
+        entity.setAvatar(baseUserVO.getAvatar());
+        entity.setPhone(baseUserVO.getPhone());
+        entity.setStatus(baseUserVO.getStatus());
+        entity.setSex(baseUserVO.getSex());
+        entity.setBirthday(baseUserVO.getBirthday());
+        entity.setSignature(baseUserVO.getSignature());
+        entity.setLocation(baseUserVO.getLocation());
+        entity.setAddress(baseUserVO.getAddress());
+        entity.setRemark(baseUserVO.getRemark());
+        return entity;
     }
 }
