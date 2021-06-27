@@ -33,7 +33,8 @@ public class DalGenerator {
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("cakeralter");
         gc.setOpen(false);
-        // gc.setSwagger2(true); 实体属性 Swagger2 注解
+        gc.setSwagger2(false);
+        gc.setFileOverride(true);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -111,13 +112,14 @@ public class DalGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-//        strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
+        strategy.setSuperEntityClass("cc.caker.mall.dal.base.po.BaseDO");
         strategy.setEntityLombokModel(true);
 //        strategy.setRestControllerStyle(true);
         // 公共父类
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
-//        strategy.setSuperEntityColumns("id");
+        strategy.setSuperEntityColumns("id", "gmt_create", "gmt_modify",
+                "creator", "modifier", "is_deleted");
 //        strategy.setInclude("base");
 //        strategy.setControllerMappingHyphenStyle(true);
 //        strategy.setTablePrefix(pc.getModuleName() + "_");
