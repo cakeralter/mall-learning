@@ -43,4 +43,14 @@ public class BaseUserTest {
 //        baseUser.setRemark();
         baseUserDOMapper.insert(baseUserDO);
     }
+
+    @Test
+    public void testUpdate() {
+
+    }
+
+    @Test
+    public void testQuery() {
+
+    }
 }
