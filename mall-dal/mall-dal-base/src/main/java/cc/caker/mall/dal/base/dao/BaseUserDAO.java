@@ -19,6 +19,7 @@ public class BaseUserDAO {
 
     /**
      * desc:插入表:base_user.<br/>
+     *
      * @param entity entity
      * @return Long
      */
@@ -28,6 +29,7 @@ public class BaseUserDAO {
 
     /**
      * desc:批量插入表:base_user.<br/>
+     *
      * @param list list
      * @return Long
      */
@@ -37,6 +39,7 @@ public class BaseUserDAO {
 
     /**
      * desc:根据主键删除数据:base_user.<br/>
+     *
      * @param id id
      * @return Long
      */
@@ -46,6 +49,7 @@ public class BaseUserDAO {
 
     /**
      * desc:根据主键获取数据:base_user.<br/>
+     *
      * @param id id
      * @return BaseUserDO
      */
@@ -55,6 +59,7 @@ public class BaseUserDAO {
 
     /**
      * desc:根据唯一约束UidName更新表:base_user.<br/>
+     *
      * @param entity entity
      * @return Long
      */
@@ -64,7 +69,8 @@ public class BaseUserDAO {
 
     /**
      * desc:根据唯一约束UidName删除数据:base_user.<br/>
-     * @param uid uid
+     *
+     * @param uid      uid
      * @param nickName nickName
      * @param userName userName
      * @return Long
@@ -75,7 +81,8 @@ public class BaseUserDAO {
 
     /**
      * desc:根据唯一约束UidName获取数据:base_user.<br/>
-     * @param uid uid
+     *
+     * @param uid      uid
      * @param nickName nickName
      * @param userName userName
      * @return BaseUserDO
