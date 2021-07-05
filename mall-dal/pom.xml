@@ -12,7 +12,7 @@
     <artifactId>mall-dal</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>mall-dal-base</module>
+        <module>mall-dal-ums</module>
     </modules>
 
     <properties>

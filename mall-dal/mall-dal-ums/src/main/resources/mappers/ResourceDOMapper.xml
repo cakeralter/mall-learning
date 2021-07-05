@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cc.caker.mall.dal.ums.mapper.ResourceDOMapper">
+    <!-- 自动生成,请修改 UMS_RESOURCE.xml -->
+    <resultMap id="BaseResultMap"
+               type="cc.caker.mall.dal.ums.dataobject.ResourceDO">
+        <id column="ID" property="id"
+            jdbcType="BIGINT"
+            javaType="Long"/>
+
+        <result column="CREATOR" property="creator"
+                jdbcType="BIGINT"
+                javaType="Long"/>
+
+        <result column="MODIFIER" property="modifier"
+                jdbcType="BIGINT"
+                javaType="Long"/>
+
+        <result column="URI" property="uri"
+                jdbcType="VARCHAR"
+                javaType="String"/>
+
+        <result column="CODE" property="code"
+                jdbcType="VARCHAR"
+                javaType="String"/>
+
+        <result column="ICON" property="icon"
+                jdbcType="VARCHAR"
+                javaType="String"/>
+
+        <result column="NAME" property="name"
+                jdbcType="VARCHAR"
+                javaType="String"/>
+
+        <result column="TYPE" property="type"
+                jdbcType="VARCHAR"
+                javaType="String"/>
+
+        <result column="REMARK" property="remark"
+                jdbcType="VARCHAR"
+                javaType="String"/>
+
+        <result column="STATUS" property="status"
+                jdbcType="VARCHAR"
+                javaType="String"/>
+
+        <result column="IS_DELETED" property="isDeleted"
+                jdbcType="CHAR"
+                javaType="String"/>
+
+        <result column="SORT" property="sort"
+                jdbcType="INTEGER"
+                javaType="Integer"/>
+
+        <result column="GMT_CREATE" property="gmtCreate"
+                jdbcType="TIMESTAMP"
+                javaType="java.time.LocalDateTime"/>
+
+        <result column="GMT_MODIFY" property="gmtModify"
+                jdbcType="TIMESTAMP"
+                javaType="java.time.LocalDateTime"/>
+    </resultMap>
+
+
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.CREATOR,sf.MODIFIER,sf.URI,sf.CODE 
+        ,sf.ICON,sf.NAME,sf.TYPE,sf.REMARK,sf.STATUS 
+        ,sf.IS_DELETED,sf.SORT,sf.GMT_CREATE,sf.GMT_MODIFY
+    </sql>
+    <sql id="Base_Column_List">
+        ID,CREATOR,MODIFIER,URI,CODE 
+        ,ICON,NAME,TYPE,REMARK,STATUS 
+        ,IS_DELETED,SORT,GMT_CREATE,GMT_MODIFY
+    </sql>
+
+
+    <!--插入表:ums_resource  mydalgen自动生成，请勿修改-->
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        <![CDATA[
+    INSERT INTO ums_resource(
+        ID
+        ,CREATOR
+        ,MODIFIER
+        ,URI
+        ,CODE
+        ,ICON
+        ,NAME
+        ,TYPE
+        ,REMARK
+        ,STATUS
+        ,IS_DELETED
+        ,SORT
+        ,GMT_CREATE
+        ,GMT_MODIFY
+    )VALUES(
+         null
+        , #{creator,jdbcType=BIGINT}
+        , #{modifier,jdbcType=BIGINT}
+        , #{uri,jdbcType=VARCHAR}
+        , #{code,jdbcType=VARCHAR}
+        , #{icon,jdbcType=VARCHAR}
+        , #{name,jdbcType=VARCHAR}
+        , #{type,jdbcType=VARCHAR}
+        , #{remark,jdbcType=VARCHAR}
+        , #{status,jdbcType=VARCHAR}
+        , 0
+        , #{sort,jdbcType=INTEGER}
+        , now()
+        , #{gmtModify,jdbcType=TIMESTAMP}
+    )
+    ]]>
+    </insert>
+
+    <!--批量插入表:ums_resource  mydalgen自动生成，请勿修改-->
+    <insert id="insertBatch">
+        INSERT INTO ums_resource(
+        ID
+        ,CREATOR
+        ,MODIFIER
+        ,URI
+        ,CODE
+        ,ICON
+        ,NAME
+        ,TYPE
+        ,REMARK
+        ,STATUS
+        ,IS_DELETED
+        ,SORT
+        ,GMT_CREATE
+        ,GMT_MODIFY
+        )VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            null
+            , #{item.creator,jdbcType=BIGINT}
+            , #{item.modifier,jdbcType=BIGINT}
+            , #{item.uri,jdbcType=VARCHAR}
+            , #{item.code,jdbcType=VARCHAR}
+            , #{item.icon,jdbcType=VARCHAR}
+            , #{item.name,jdbcType=VARCHAR}
+            , #{item.type,jdbcType=VARCHAR}
+            , #{item.remark,jdbcType=VARCHAR}
+            , #{item.status,jdbcType=VARCHAR}
+            , 0
+            , #{item.sort,jdbcType=INTEGER}
+            , now()
+            , #{item.gmtModify,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--根据主键删除数据:ums_resource  mydalgen自动生成，请勿修改-->
+    <delete id="deleteById">
+                                <![CDATA[
+        DELETE /*MS-UMS-RESOURCE-DELETEBYID*/
+        FROM ums_resource
+        WHERE ID = #{id,jdbcType=BIGINT}
+        ]]>
+            </delete>
+
+    <!--根据主键获取数据:ums_resource  mydalgen自动生成，请勿修改-->
+    <select id="getById" resultMap="BaseResultMap">
+        SELECT /*MS-UMS-RESOURCE-GETBYID*/
+        <include refid="Base_Column_List"/>
+        FROM ums_resource
+        WHERE
+        <![CDATA[
+                    ID = #{id,jdbcType=BIGINT}
+                ]]>
+    </select>
+</mapper>

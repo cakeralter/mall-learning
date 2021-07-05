@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>cc.caker</groupId>
-            <artifactId>mall-dal-base</artifactId>
+            <artifactId>mall-dal-ums</artifactId>
         </dependency>
     </dependencies>
 

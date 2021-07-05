@@ -1,0 +1,204 @@
+<!DOCTYPE table SYSTEM "../config/table-config-1.0.dtd">
+<table sqlname="ums_admin"
+       physicalName="ums_admin" remark="管理员表">
+    <!--  特殊字符说明 &lt;&gt; <> -->
+    <!-- baseSql option中 select * 会自动替换为 include -->
+    <sql id="Base_Column_List">
+        ID,CREATOR,MODIFIER,SEX,UID
+        ,EMAIL,PHONE,AVATAR,REMARK,STATUS
+        ,ADDRESS,NICK_NAME,PASSWORD,USER_NAME,IS_DELETED
+        ,GMT_CREATE,GMT_MODIFY
+    </sql>
+
+    <!-- baseSql option中 select sf.* 会自动替换为 include -->
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.CREATOR,sf.MODIFIER,sf.SEX,sf.UID
+        ,sf.EMAIL,sf.PHONE,sf.AVATAR,sf.REMARK,sf.STATUS
+        ,sf.ADDRESS,sf.NICK_NAME,sf.PASSWORD,sf.USER_NAME,sf.IS_DELETED
+        ,sf.GMT_CREATE,sf.GMT_MODIFY
+    </sql>
+
+    <operation name="insert" paramtype="object" remark="插入表:ums_admin"
+               autoGen="true">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        <![CDATA[
+    INSERT INTO ums_admin(
+        ID
+        ,CREATOR
+        ,MODIFIER
+        ,SEX
+        ,UID
+        ,EMAIL
+        ,PHONE
+        ,AVATAR
+        ,REMARK
+        ,STATUS
+        ,ADDRESS
+        ,NICK_NAME
+        ,PASSWORD
+        ,USER_NAME
+        ,IS_DELETED
+        ,GMT_CREATE
+        ,GMT_MODIFY
+    )VALUES(
+         null
+        , #{creator,jdbcType=BIGINT}
+        , #{modifier,jdbcType=BIGINT}
+        , #{sex,jdbcType=CHAR}
+        , #{uid,jdbcType=VARCHAR}
+        , #{email,jdbcType=VARCHAR}
+        , #{phone,jdbcType=VARCHAR}
+        , #{avatar,jdbcType=VARCHAR}
+        , #{remark,jdbcType=VARCHAR}
+        , #{status,jdbcType=VARCHAR}
+        , #{address,jdbcType=VARCHAR}
+        , #{nickName,jdbcType=VARCHAR}
+        , #{password,jdbcType=VARCHAR}
+        , #{userName,jdbcType=VARCHAR}
+        , 0
+        , now()
+        , #{gmtModify,jdbcType=TIMESTAMP}
+    )
+    ]]>
+    </operation>
+
+    <!-- foreach 可以自定义类型，paramtype="primitive" foreach->javatype="自己书写的类"  -->
+    <!-- 只有一个参数且为List时必须将参数命名为list -->
+    <operation name="insertBatch" paramtype="objectList"
+               remark="批量插入表:ums_admin" autoGen="true">
+        INSERT INTO ums_admin(
+        ID
+        ,CREATOR
+        ,MODIFIER
+        ,SEX
+        ,UID
+        ,EMAIL
+        ,PHONE
+        ,AVATAR
+        ,REMARK
+        ,STATUS
+        ,ADDRESS
+        ,NICK_NAME
+        ,PASSWORD
+        ,USER_NAME
+        ,IS_DELETED
+        ,GMT_CREATE
+        ,GMT_MODIFY
+        )VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            null
+            , #{item.creator,jdbcType=BIGINT}
+            , #{item.modifier,jdbcType=BIGINT}
+            , #{item.sex,jdbcType=CHAR}
+            , #{item.uid,jdbcType=VARCHAR}
+            , #{item.email,jdbcType=VARCHAR}
+            , #{item.phone,jdbcType=VARCHAR}
+            , #{item.avatar,jdbcType=VARCHAR}
+            , #{item.remark,jdbcType=VARCHAR}
+            , #{item.status,jdbcType=VARCHAR}
+            , #{item.address,jdbcType=VARCHAR}
+            , #{item.nickName,jdbcType=VARCHAR}
+            , #{item.password,jdbcType=VARCHAR}
+            , #{item.userName,jdbcType=VARCHAR}
+            , 0
+            , now()
+            , #{item.gmtModify,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </operation>
+
+    <!-- 不推荐使用全 update 有需要自己打开
+<operation name="update" paramtype="object" remark="更新表:ums_admin"  autoGen="true">
+<![CDATA[
+UPDATE ums_admin
+SET
+    MODIFIER        = #{modifier,jdbcType=BIGINT}
+    ,SEX             = #{sex,jdbcType=CHAR}
+    ,UID             = #{uid,jdbcType=VARCHAR}
+    ,EMAIL           = #{email,jdbcType=VARCHAR}
+    ,PHONE           = #{phone,jdbcType=VARCHAR}
+    ,AVATAR          = #{avatar,jdbcType=VARCHAR}
+    ,REMARK          = #{remark,jdbcType=VARCHAR}
+    ,STATUS          = #{status,jdbcType=VARCHAR}
+    ,ADDRESS         = #{address,jdbcType=VARCHAR}
+    ,NICK_NAME       = #{nickName,jdbcType=VARCHAR}
+    ,PASSWORD        = #{password,jdbcType=VARCHAR}
+    ,USER_NAME       = #{userName,jdbcType=VARCHAR}
+    ,IS_DELETED      = #{isDeleted,jdbcType=CHAR}
+    ,GMT_MODIFY      = #{gmtModify,jdbcType=TIMESTAMP}
+WHERE
+    ID              = #{id,jdbcType=BIGINT}
+]]>
+</operation>
+-->
+    <operation name="deleteById"
+               remark="根据主键删除数据:ums_admin">
+        <![CDATA[
+                DELETE FROM ums_admin
+                WHERE
+                    ID = #{id,jdbcType=BIGINT}
+                ]]>
+    </operation>
+
+    <operation name="getById" multiplicity="one"
+               remark="根据主键获取数据:ums_admin">
+        SELECT *
+        FROM ums_admin
+        WHERE
+        <![CDATA[
+                    ID = #{id,jdbcType=BIGINT}
+                ]]>
+    </operation>
+
+    <!-- 根据唯一约束操作数据 -->
+    <operation name="updateByUidName" paramtype="object"
+               remark="根据唯一约束UidName更新表:ums_admin">
+        <![CDATA[
+                UPDATE ums_admin
+                SET
+                        MODIFIER        = #{modifier,jdbcType=BIGINT}
+                        ,SEX             = #{sex,jdbcType=CHAR}
+                        ,EMAIL           = #{email,jdbcType=VARCHAR}
+                        ,PHONE           = #{phone,jdbcType=VARCHAR}
+                        ,AVATAR          = #{avatar,jdbcType=VARCHAR}
+                        ,REMARK          = #{remark,jdbcType=VARCHAR}
+                        ,STATUS          = #{status,jdbcType=VARCHAR}
+                        ,ADDRESS         = #{address,jdbcType=VARCHAR}
+                        ,PASSWORD        = #{password,jdbcType=VARCHAR}
+                        ,IS_DELETED      = #{isDeleted,jdbcType=CHAR}
+                        ,GMT_MODIFY      = #{gmtModify,jdbcType=TIMESTAMP}
+                WHERE
+                    UID             = #{uid,jdbcType=VARCHAR}
+                    AND USER_NAME       = #{userName,jdbcType=VARCHAR}
+                    AND NICK_NAME       = #{nickName,jdbcType=VARCHAR}
+                ]]>
+    </operation>
+
+    <operation name="deleteByUidName"
+               remark="根据唯一约束UidName删除数据:ums_admin">
+        <![CDATA[
+                DELETE FROM ums_admin
+                WHERE
+                    UID             = #{uid,jdbcType=VARCHAR}
+                    AND USER_NAME       = #{userName,jdbcType=VARCHAR}
+                    AND NICK_NAME       = #{nickName,jdbcType=VARCHAR}
+                ]]>
+    </operation>
+
+    <operation name="getByUidName" multiplicity="one"
+               remark="根据唯一约束UidName获取数据:ums_admin">
+        SELECT *
+        FROM ums_admin
+        WHERE
+        <![CDATA[
+                    UID             = #{uid,jdbcType=VARCHAR}
+                    AND USER_NAME       = #{userName,jdbcType=VARCHAR}
+                    AND NICK_NAME       = #{nickName,jdbcType=VARCHAR}
+                ]]>
+    </operation>
+
+</table>

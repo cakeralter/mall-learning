@@ -1,0 +1,140 @@
+<!DOCTYPE table SYSTEM "../config/table-config-1.0.dtd">
+<table sqlname="ums_resource"
+       physicalName="ums_resource" remark="资源表">
+    <!--  特殊字符说明 &lt;&gt; <> -->
+    <!-- baseSql option中 select * 会自动替换为 include -->
+    <sql id="Base_Column_List">
+        ID,CREATOR,MODIFIER,URI,CODE
+        ,ICON,NAME,TYPE,REMARK,STATUS
+        ,IS_DELETED,SORT,GMT_CREATE,GMT_MODIFY
+    </sql>
+
+    <!-- baseSql option中 select sf.* 会自动替换为 include -->
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.CREATOR,sf.MODIFIER,sf.URI,sf.CODE
+        ,sf.ICON,sf.NAME,sf.TYPE,sf.REMARK,sf.STATUS
+        ,sf.IS_DELETED,sf.SORT,sf.GMT_CREATE,sf.GMT_MODIFY
+    </sql>
+
+    <operation name="insert" paramtype="object" remark="插入表:ums_resource"
+               autoGen="true">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        <![CDATA[
+    INSERT INTO ums_resource(
+        ID
+        ,CREATOR
+        ,MODIFIER
+        ,URI
+        ,CODE
+        ,ICON
+        ,NAME
+        ,TYPE
+        ,REMARK
+        ,STATUS
+        ,IS_DELETED
+        ,SORT
+        ,GMT_CREATE
+        ,GMT_MODIFY
+    )VALUES(
+         null
+        , #{creator,jdbcType=BIGINT}
+        , #{modifier,jdbcType=BIGINT}
+        , #{uri,jdbcType=VARCHAR}
+        , #{code,jdbcType=VARCHAR}
+        , #{icon,jdbcType=VARCHAR}
+        , #{name,jdbcType=VARCHAR}
+        , #{type,jdbcType=VARCHAR}
+        , #{remark,jdbcType=VARCHAR}
+        , #{status,jdbcType=VARCHAR}
+        , 0
+        , #{sort,jdbcType=INTEGER}
+        , now()
+        , #{gmtModify,jdbcType=TIMESTAMP}
+    )
+    ]]>
+    </operation>
+
+    <!-- foreach 可以自定义类型，paramtype="primitive" foreach->javatype="自己书写的类"  -->
+    <!-- 只有一个参数且为List时必须将参数命名为list -->
+    <operation name="insertBatch" paramtype="objectList"
+               remark="批量插入表:ums_resource" autoGen="true">
+        INSERT INTO ums_resource(
+        ID
+        ,CREATOR
+        ,MODIFIER
+        ,URI
+        ,CODE
+        ,ICON
+        ,NAME
+        ,TYPE
+        ,REMARK
+        ,STATUS
+        ,IS_DELETED
+        ,SORT
+        ,GMT_CREATE
+        ,GMT_MODIFY
+        )VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            null
+            , #{item.creator,jdbcType=BIGINT}
+            , #{item.modifier,jdbcType=BIGINT}
+            , #{item.uri,jdbcType=VARCHAR}
+            , #{item.code,jdbcType=VARCHAR}
+            , #{item.icon,jdbcType=VARCHAR}
+            , #{item.name,jdbcType=VARCHAR}
+            , #{item.type,jdbcType=VARCHAR}
+            , #{item.remark,jdbcType=VARCHAR}
+            , #{item.status,jdbcType=VARCHAR}
+            , 0
+            , #{item.sort,jdbcType=INTEGER}
+            , now()
+            , #{item.gmtModify,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </operation>
+
+    <!-- 不推荐使用全 update 有需要自己打开
+<operation name="update" paramtype="object" remark="更新表:ums_resource"  autoGen="true">
+<![CDATA[
+UPDATE ums_resource
+SET
+    MODIFIER        = #{modifier,jdbcType=BIGINT}
+    ,URI             = #{uri,jdbcType=VARCHAR}
+    ,CODE            = #{code,jdbcType=VARCHAR}
+    ,ICON            = #{icon,jdbcType=VARCHAR}
+    ,NAME            = #{name,jdbcType=VARCHAR}
+    ,TYPE            = #{type,jdbcType=VARCHAR}
+    ,REMARK          = #{remark,jdbcType=VARCHAR}
+    ,STATUS          = #{status,jdbcType=VARCHAR}
+    ,IS_DELETED      = #{isDeleted,jdbcType=CHAR}
+    ,SORT            = #{sort,jdbcType=INTEGER}
+    ,GMT_MODIFY      = #{gmtModify,jdbcType=TIMESTAMP}
+WHERE
+    ID              = #{id,jdbcType=BIGINT}
+]]>
+</operation>
+-->
+    <operation name="deleteById"
+               remark="根据主键删除数据:ums_resource">
+        <![CDATA[
+                DELETE FROM ums_resource
+                WHERE
+                    ID = #{id,jdbcType=BIGINT}
+                ]]>
+    </operation>
+
+    <operation name="getById" multiplicity="one"
+               remark="根据主键获取数据:ums_resource">
+        SELECT *
+        FROM ums_resource
+        WHERE
+        <![CDATA[
+                    ID = #{id,jdbcType=BIGINT}
+                ]]>
+    </operation>
+
+</table>
